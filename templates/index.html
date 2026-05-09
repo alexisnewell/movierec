@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Movie Recommender</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <div class="container">
+
+        <h1>Movie Recommender</h1>
+
+        <form method="POST">
+
+            <input
+                type="text"
+                name="movie"
+                placeholder="Enter a movie title"
+                required
+            >
+
+            <button type="submit">
+                Recommend
+            </button>
+
+        </form>
+
+        {% if movie %}
+            <h2>Recommendations for "{{ movie }}"</h2>
+
+            <table>
+
+                <tr>
+                    <th>Movie</th>
+                    <th>Correlation</th>
+                    <th>Ratings</th>
+                </tr>
+
+                {% for row in tables %}
+
+                <tr>
+                    <td>{{ row.title }}</td>
+                    <td>{{ "%.2f"|format(row.Correlation) }}</td>
+                    <td>{{ row['num of ratings'] }}</td>
+                </tr>
+
+                {% endfor %}
+
+            </table>
+
+        {% endif %}
+
+    </div>
+
+</body>
+</html>
